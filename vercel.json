@@ -1,5 +1,0 @@
-{
-  "redirects": [
-    { "source": "/(.*)", "destination": "https://alashlink.kz/$1", "permanent": true }
-  ]
-}
