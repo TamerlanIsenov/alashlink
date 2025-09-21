@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.alashlink.kz/sitemap.xml
+Host: www.alashlink.kz
