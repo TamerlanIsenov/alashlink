@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alashlink.kz/</loc>
+    <loc>https://www.alashlink.kz/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://alashlink.kz/catalog/black/</loc>
+    <loc>https://www.alashlink.kz/catalog/black</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://alashlink.kz/catalog/stainless/</loc>
+    <loc>https://www.alashlink.kz/catalog/stainless</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://alashlink.kz/catalog/nonferrous/</loc>
+    <loc>https://www.alashlink.kz/catalog/nonferrous</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://alashlink.kz/catalog/cable/</loc>
+    <loc>https://www.alashlink.kz/catalog/cable</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
