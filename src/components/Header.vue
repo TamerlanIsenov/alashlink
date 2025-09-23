@@ -20,9 +20,15 @@
         <a href="mailto:info@alashlink.kz" class="contact hide-sm">info@alashlink.kz</a>
         <a :href="waHref" target="_blank" rel="noopener" class="wa">WhatsApp</a>
 
-        <!-- Бургер -->
-        <button class="burger" @click="open = !open" :aria-expanded="open.toString()" aria-label="Меню">
-          <span :class="{open}"></span>
+        <!-- Бургер из 3 линий -->
+        <button
+          class="burger"
+          :class="{ open }"
+          @click="open = !open"
+          :aria-expanded="open.toString()"
+          aria-label="Меню"
+        >
+          <i></i><i></i><i></i>
         </button>
       </div>
     </div>
@@ -74,14 +80,13 @@ export default {
 
 <style scoped>
 :root{
-  --gold:#c1a269; --blue1:#00f0ff; --blue2:#00d4e0;
+  --gold:#c1a269; --blue2:#00d4e0;
   --bg:#0b0f14; --line:#1f2a3a; --text:#e9f0f5; --muted:#b9c6d4;
 }
 
-/* Шапка */
 .header{ position:fixed; top:0; left:0; right:0; z-index:1000; background:#0b0f14; border-bottom:1px solid var(--line); }
 .container{
-  max-width:1200px;  /* фиксируем нормальную ширину */
+  max-width:1200px;
   margin:0 auto;
   padding:12px 16px;
   display:flex; align-items:center; justify-content:space-between;
@@ -101,20 +106,37 @@ export default {
 .actions{ display:flex; align-items:center; gap:12px; }
 .contact{ color:var(--muted); text-decoration:none; font-size:14px; }
 .contact:hover{ color:var(--text); }
-
 .wa{ padding:8px 12px; border-radius:10px; background:#30d158; color:#0b0f14; font-weight:700; text-decoration:none; }
 
-/* Бургер */
-.burger{ display:none; position:relative; width:44px; height:40px; border:none; background:transparent; padding:0; }
-.burger span,.burger span::before,.burger span::after{ content:""; position:absolute; left:10px; right:10px; height:2px; background:#cfe7ff; transition:.2s; }
-.burger span{ top:19px; }
-.burger span::before{ top:-7px; }
-.burger span::after{ top:7px; }
-.burger span.open{ background:transparent; }
-.burger span.open::before{ transform:translateY(7px) rotate(45deg); }
-.burger span.open::after{ transform:translateY(-7px) rotate(-45deg); }
+/* Бургер: 3 реальные линии */
+.burger{
+  display:none;
+  width:44px; height:40px;
+  border:none; background:transparent; padding:0; cursor:pointer;
+  position:relative;
+}
+.burger i{
+  display:block;
+  position:absolute; left:10px; right:10px;
+  height:2px; background:#cfe7ff; border-radius:2px;
+  transition:transform .25s ease, opacity .2s ease, top .25s ease;
+}
+.burger i:nth-child(1){ top:12px; }  /* верхняя */
+.burger i:nth-child(2){ top:19px; }  /* средняя */
+.burger i:nth-child(3){ top:26px; }  /* нижняя */
 
-/* Мобильный дровер */
+/* Анимация в крест */
+.burger.open i:nth-child(1){
+  top:19px; transform:rotate(45deg);
+}
+.burger.open i:nth-child(2){
+  opacity:0;
+}
+.burger.open i:nth-child(3){
+  top:19px; transform:rotate(-45deg);
+}
+
+/* Drawer */
 .drawer{ position:fixed; inset:0; background:rgba(0,0,0,.35); backdrop-filter:saturate(1.1) blur(2px); display:none; }
 .drawer.open{ display:block; }
 .drawer-inner{ position:absolute; top:64px; left:0; right:0; background:#0c1219; border-top:1px solid var(--line); padding:12px 16px; display:flex; flex-direction:column; gap:10px; }
@@ -127,12 +149,12 @@ export default {
 @media (max-width:1080px){
   .nav{ display:none; }
   .hide-sm{ display:none; }
-  .burger{ display:inline-flex; align-items:center; justify-content:center; }
+  .burger{ display:inline-block; }
 }
 @media (max-width:560px){
   .contact{ display:none; }
 }
 
-/* Универсальный запас под фикс-хедер при переходах по #якорям */
+/* Запас под фикс-хедер для #якорей */
 :global(section[id]){ scroll-margin-top: 80px; }
 </style>

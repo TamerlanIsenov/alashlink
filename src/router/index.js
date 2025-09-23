@@ -6,7 +6,7 @@ import Catalog from '../components/Catalog.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home', // ← было 'Home'
     component: Home,
     meta: {
       title: 'AlashLink — поставки металлопроката и кабеля под ключ в Казахстане',
@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: '/contact',
-    name: 'Contact',
+    name: 'contact',
     component: Contact,
     meta: {
       title: 'Контакты | AlashLink',
@@ -35,7 +35,19 @@ const routes = [
     }
   },
 
-  // SEO-страницы категорий
+  // ✅ Универсальный роут, под который пушит Catalog.vue
+  {
+    path: '/category/:group/:slug',
+    name: 'category',
+    component: () => import('../pages/CategoryPage.vue'),
+    meta: {
+      title: 'Категория — AlashLink',
+      description:
+        'Категория продукции AlashLink: позиции, спецификация и быстрый запрос цены в WhatsApp.'
+    }
+  },
+
+  // Опционально: оставляем SEO-роуты (будут работать по прямым URL)
   {
     path: '/category/black/:slug',
     name: 'category-black',
@@ -86,11 +98,9 @@ const router = createRouter({
   }
 })
 
-// 🔥 Обновляем title и description при переходе
+// Мета-обновление
 router.afterEach((to) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
+  if (to.meta.title) document.title = to.meta.title
   if (to.meta.description) {
     let tag = document.querySelector('meta[name="description"]')
     if (tag) {

@@ -28,6 +28,7 @@
             role="tab"
             :aria-selected="(activeGroup === t.key).toString()"
             @click="goGroup(t.key)"
+            type="button"
           >
             {{ t.label }}
           </button>
@@ -221,7 +222,7 @@ export default {
     goBack() {
       // если есть история — назад, иначе на главную к каталогу
       if (window.history.length > 1) {
-        this.$router.back();
+        window.history.back();
       } else {
         this.$router.push({ name: "home", hash: "#catalog" });
       }
@@ -236,7 +237,11 @@ export default {
   --text:#e9f0f5; --muted:#b9c6d4; --glow:#00d4e0; --gold:#c1a269;
 }
 
-.catalog{ background:linear-gradient(180deg,#0b0f14 0%, #0b0f14 40%, #0e131b 100%); padding:72px 0; border-top:1px solid var(--line); }
+.catalog{
+  background:linear-gradient(180deg,#0b0f14 0%, #0b0f14 40%, #0e131b 100%);
+  padding:72px 0;
+  border-top:1px solid var(--line);
+}
 .container{ max-width:1200px; margin:0 auto; padding:0 16px; }
 
 .section-head{ text-align:center; margin-bottom:20px; }
@@ -263,13 +268,19 @@ export default {
 
 /* Верхний уровень кнопок */
 .type-switch{
-  margin:18px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+  margin:18px auto 0;
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
 }
 .type-btn{
   border:1px solid rgba(255,255,255,.08);
   background:linear-gradient(180deg,#121a24,#0f1620 60%, #0e141d);
-  color:var(--text); padding:10px 14px; font-weight:800; border-radius:12px; cursor:pointer;
-  transition:.18s ease; box-shadow:0 6px 18px rgba(0,0,0,.25);
+  color:var(--text);
+  padding:10px 14px;
+  font-weight:800;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.18s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
 }
 .type-btn:hover{ transform:translateY(-1px); border-color:rgba(0,212,224,.35); }
 .type-btn.active{
@@ -279,35 +290,79 @@ export default {
 }
 
 /* Панель подкатегорий */
-.panel{ margin-top:26px; min-height: 420px; } /* фикс высоты = без скачков при смене */
+.panel{ margin-top:26px; min-height: 420px; }
 .g-title{ color:var(--text); font-size:20px; margin:0 0 12px; font-weight:900; }
 
 /* плавная замена сеток */
 .fade-enter-active, .fade-leave-active { transition: opacity .16s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
+/* Сетка и карточки */
 .grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
 .card{
-  height:120px; border:1px solid rgba(255,255,255,.08); border-radius:14px;
-  background: radial-gradient(100% 140% at 0% 0%, rgba(0,212,224,.12), transparent 55%), linear-gradient(180deg,#121a24,#0f1620 60%, #0e141d);
-  color:var(--text); display:flex; align-items:center; justify-content:space-between;
-  padding:16px; text-align:left; cursor:pointer; transition:.18s ease; box-shadow:0 6px 18px rgba(0,0,0,.25);
+  min-height:120px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:
+    radial-gradient(100% 140% at 0% 0%, rgba(0,212,224,.12), transparent 55%),
+    linear-gradient(180deg,#121a24,#0f1620 60%, #0e141d);
+  color:var(--text);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px;
+  text-align:left;
+  cursor:pointer;
+  transition:.18s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
 }
 .card:hover{ transform:translateY(-2px); border-color:rgba(0,212,224,.45); box-shadow:0 10px 26px rgba(0,0,0,.35); }
 .card-title{ font-weight:900; font-size:16px; }
 .arrow{ font-weight:900; opacity:.8; }
 
+/* Доступность: фокус */
+.card:focus-visible, .type-btn:focus-visible, .back-btn:focus-visible{
+  outline:2px solid rgba(0,212,224,.65);
+  outline-offset:2px;
+}
+
+/* ====== Адаптив ====== */
 @media (max-width:1080px){
   .grid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
   .panel{ min-height: 380px; }
 }
+
+/* Прокручиваемые табы со snap на мобилке */
 @media (max-width:760px){
-  .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .card{ height:110px; }
-  .panel{ min-height: 360px; }
+  .type-switch{
+    justify-content:flex-start;
+    overflow-x:auto;
+    scrollbar-width:none;               /* Firefox */
+    -ms-overflow-style:none;            /* IE/Edge */
+    gap:8px; padding:0 8px;
+    scroll-snap-type:x mandatory;
+    mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  }
+  .type-switch::-webkit-scrollbar{ display:none; } /* Chrome/Safari */
+  .type-btn{ scroll-snap-align:center; white-space:nowrap; padding:12px 14px; font-size:15px; }
+
+  .g-title{ font-size:18px; margin:8px 8px 12px; text-align:left; }
+  .head-row{ padding:0 8px; }
+
+  .panel{ min-height:auto; } /* без фиксированной высоты */
+  .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .card{ min-height:96px; padding:14px; }
+  .card-title{ font-size:16px; line-height:1.25; }
+  .arrow{ font-size:18px; }
 }
-@media (max-width:520px){
+
+/* Очень узкие (до 400px) — 1 колонка */
+@media (max-width:400px){
   .grid{ grid-template-columns:1fr; }
-  .panel{ min-height: 340px; }
+  .card{ min-height:88px; }
+}
+
+/* Совсем узкие (до 520px) — резерв, если нужно вернуть 1 колонку раньше */
+/* Оставил твой старый брейкпоинт, но он уже перекрывается 400px блоком; при желании можно убрать */
+@media (max-width:520px){
+  .panel{ min-height: 340px; } /* можно удалить, если не нужен фикс */
 }
 </style>

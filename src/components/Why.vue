@@ -73,106 +73,96 @@ export default { name: 'Why' }
   --accent:#00d4e0;
 }
 
-.why {
-  background: var(--bg);
-  border-top: 1px solid rgba(255,255,255,.04);
+/* Секция */
+.why{
+  background:var(--bg);
+  border-top:1px solid rgba(255,255,255,.04);
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 16px 56px;
-}
-
-.head {
-  text-align: center;
-  margin-bottom: 32px;
-}
-.head h2 {
-  margin: 0 0 8px;
-  font-size: clamp(22px,2.4vw,28px);
-  font-weight: 800;
-  color: var(--text);
-}
-.head .lead {
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:48px 16px 64px;
 }
 
-/* Сетка карточек */
-.grid {
-  display: grid;
-  gap: 24px; /* увеличили расстояние между карточками */
-  grid-template-columns: 1fr;
-  grid-auto-rows: 1fr;
+/* Заголовок */
+.head{ text-align:center; margin-bottom:32px; }
+.head h2{
+  margin:0 0 10px;
+  font-size:clamp(22px,2.4vw,30px);
+  font-weight:900;
+  color:var(--text);
 }
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2,1fr); }
+.head .lead{
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.5;
+  max-width:720px;
+  margin-inline:auto;
 }
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3,1fr); }
+
+/* Сетка карточек (UL) — сбрасываем дефолтные отступы и центрируем */
+.grid{
+  display:grid;
+  gap:24px;                 /* расстояние между карточками */
+  grid-template-columns:1fr;
+  list-style:none;          /* убираем буллиты */
+  padding:0;                /* убираем внутренние отступы UL */
+  margin:0 auto;            /* центрируем сетку */
+  max-width:1040px;         /* чтобы не растягивалось на всю ширину */
+}
+@media (min-width:640px){
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:1024px){
+  .grid{ grid-template-columns:repeat(3,1fr); }
 }
 
 /* Карточка */
-.card {
-  list-style: none;
-  background: linear-gradient(180deg, var(--card), #0e141c);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 12px;
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  column-gap: 14px;
-  align-items: start;
-  height: 100%;
-  overflow: hidden;             /* не даём контенту вылезти за скругления */
-  background-clip: padding-box; /* фон обрезается по границе */
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+.card{
+  background:linear-gradient(180deg, var(--card), #0e141c);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:56px 1fr;
+  column-gap:16px;
+  align-items:start;
+  height:100%;
+  box-sizing:border-box;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
-.card:hover {
-  border-color: rgba(0,212,224,.35);
-  box-shadow: 0 0 0 1px rgba(0,212,224,.12) inset;
-  transform: translateY(-2px);
+.card:hover{
+  border-color:rgba(0,212,224,.45);
+  box-shadow:0 4px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,212,224,.12);
+  transform:translateY(-3px);
 }
 
 /* Иконка */
-.icon {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(80% 80% at 50% 30%, rgba(0,212,224,.18), rgba(0,0,0,0));
-  border: 1px solid rgba(255,255,255,.06);
-  flex-shrink: 0;
+.icon{
+  grid-column:1;
+  grid-row:1 / span 2;
+  width:56px; height:56px;
+  border-radius:12px;
+  display:grid; place-items:center;
+  background:radial-gradient(80% 80% at 50% 30%, rgba(0,212,224,.18), transparent);
+  border:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
 }
-.icon svg {
-  width: 26px;
-  height: 26px;
-  fill: #8fd9e6;
-  opacity: .95;
-}
+.icon svg{ width:26px; height:26px; fill:#8fd9e6; opacity:.95; }
 
 /* Текст */
-.body {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.title {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.35;
-}
-.desc {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.55;
+.body{ grid-column:2; display:flex; flex-direction:column; gap:6px; }
+.title{ margin:0; font-size:17px; font-weight:800; color:var(--text); line-height:1.35; }
+.desc{ margin:0; font-size:15px; color:var(--muted); line-height:1.55; }
+
+/* Мобильные правки */
+@media (max-width:640px){
+  .grid{ gap:18px; max-width:600px; }           /* чуть плотнее, но не слипается */
+  .card{ grid-template-columns:44px 1fr; padding:14px; column-gap:12px; }
+  .icon{ width:44px; height:44px; border-radius:10px; }
+  .icon svg{ width:20px; height:20px; }
+  .title{ font-size:16px; }
+  .desc{ font-size:14px; }
 }
 </style>

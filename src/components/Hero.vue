@@ -79,18 +79,11 @@ h1 .kz{
   font-weight: 900;
   text-align: center;
   font-size: 1.1em;
-
-  /* Золотой градиент */
   background: linear-gradient(90deg, #ffd700, #c1a269, #f6e27a);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-
-  /* Фолбэк */
-  color: #c1a269
-;
-
-  /* Лёгкое свечение */
+  color: #c1a269;
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.6), 0 0 16px rgba(193, 162, 105, 0.4);
 }
 
@@ -117,7 +110,9 @@ h1 .kz{
   background:#30d158;
   color:#0b0f14;
   border: 1px solid rgba(255,255,255,.08);
+  transition:.2s;
 }
+.wa:hover{ background:#28b94c; }
 
 /* Буллеты */
 .bullets{
@@ -134,10 +129,17 @@ h1 .kz{
 
 /* Мобильные правки */
 @media (max-width: 768px){
-  .container{ padding: 80px 16px 32px; min-height:auto; }
-  h1, .sub{ text-align:left; }
-  h1 .kz{ text-align:left; }
-  .actions{ justify-content:flex-start; }
-  .bullets{ justify-content:flex-start; gap:16px; }
+  .container{ padding: 72px 16px 32px; min-height:auto; }
+  h1, .sub{ text-align:center; }
+  h1 .kz{ text-align:center; }
+  .actions{ justify-content:center; }
+  .wa{ width:100%; text-align:center; }
+  .bullets{
+    flex-direction:column;
+    gap:14px;
+    align-items:flex-start;
+    margin-top:20px;
+  }
+  .bullets li{ font-size:15px; }
 }
 </style>
