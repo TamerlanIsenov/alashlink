@@ -54,8 +54,7 @@ export default {
   computed: {
     waHref() {
       const phone = "77002023104";
-      const text = encodeURIComponent("Здравствуйте! Хочу заказать импорт из РФ под ключ.");
-      return `https://wa.me/${phone}?text=${text}`;
+      return `https://wa.me/${phone}`;
     }
   },
   methods: {
