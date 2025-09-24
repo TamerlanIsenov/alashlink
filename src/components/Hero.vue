@@ -2,14 +2,22 @@
   <section id="hero" class="hero">
     <div class="container">
       <div class="copy">
+        <!-- Бейджи -->
+        <div class="badges">
+          <span class="badge">Собственная металлобаза</span>
+          <span class="dot"></span>
+          <span class="badge alt">Импорт под ключ</span>
+        </div>
+
         <h1>
-          Металлопрокат и кабель из России — <br />
-          <span class="kz">по Казахстану</span>
+          Металлопрокат и кабель —<br />
+          <span class="kz">поставки со склада и напрямую из России</span>
         </h1>
 
         <p class="sub">
-          Берём на себя поиск завода, договор, таможню, сертификаты и логистику.
-          Оставьте заявку — перезвоним в течение 15 минут.
+          Мы — высококвалифицированные поставщики металлопроката и кабельно-проводниковой продукции.
+          У нас своя металлобаза в Казахстане + прямой импорт из России: 
+          заводы, договоры, таможня, сертификаты и логистика — всё берём на себя.
         </p>
 
         <div class="actions">
@@ -17,9 +25,11 @@
         </div>
 
         <ul class="bullets">
-          <li>10 000+ позиций под заказ</li>
+          <li>Собственная металлобаза в Казахстане</li>
+          <li>Импорт из РФ под ключ: от завода до склада</li>
           <li>Документы и НДС — официально</li>
-          <li>Доставка по всему РК в срок</li>
+          <li>Доставка по всей стране в срок</li>
+          <li>10 000+ позиций под заказ и со склада</li>
         </ul>
       </div>
     </div>
@@ -63,9 +73,32 @@ export default {
 }
 .copy{ width:100%; max-width:1200px; margin:0 auto; }
 
+/* Бейджи */
+.badges{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px; margin-bottom:14px;
+}
+.badge{
+  padding:6px 12px; border-radius:999px; font-weight:700; font-size:13px;
+  background: rgba(193,162,105,.16);
+  border:1px solid rgba(193,162,105,.35);
+  color: var(--gold2);
+  backdrop-filter: blur(4px);
+}
+.badge.alt{
+  background: rgba(0,212,224,.12);
+  border-color: rgba(0,212,224,.35);
+  color:#bff7ff;
+}
+.dot{
+  width:6px; height:6px; border-radius:50%;
+  background: linear-gradient(90deg, var(--blue1), var(--blue2));
+  opacity:.9;
+}
+
 /* Заголовок */
 h1{
-  margin: 0 0 20px;
+  margin: 8px 0 18px;
   font-weight: 800;
   line-height: 1.2;
   color: var(--text);
@@ -93,7 +126,7 @@ h1 .kz{
   color: var(--muted);
   font-size: clamp(16px, 1.6vw, 18px);
   line-height: 1.6;
-  max-width: 820px;
+  max-width: 900px;
   text-align: center;
 }
 
